@@ -2,16 +2,16 @@
 import java.util.Date;
 
 public class Save {
-    private final String num;
+    private final String recipe;
     private final Date date;
 
-    public Save(String num) {
-        this.num = num;
+    public Save(String recipe) {
+        this.recipe = recipe;
         this.date = new Date();
     }
 
     public String getNum() {
-        return num;
+        return recipe;
     }
 
     public Date getDate() {
