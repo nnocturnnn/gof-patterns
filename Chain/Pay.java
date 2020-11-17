@@ -1,15 +1,13 @@
 
-public abstract class Pay {
-    private int priority;
-    private Terminal nextTerminal;
+public class Currency {
 
-    public Pay(int priority) {
-        this.priority = priority;
-    }
-
-    public void setNextPay(Terminal terminal) {
-        this.nextTerminal = terminal;
-    }
-
-    public void PayManager
+	private int amount;
+	
+	public Currency(int amt){
+		this.amount=amt;
+	}
+	
+	public int getAmount(){
+		return this.amount;
+	}
 }
