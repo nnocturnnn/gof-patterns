@@ -62,11 +62,7 @@ public interface SubExpression {
     
     @Override
     public void sub(SubExpression expr) {
-      if (expr instanceof IntegerValue) {
         exprs.add(new IntegerValue(-1*expr.value().intValue()));
-      } else {
-        exprs.add(new FloatValue(-1*expr.value().floatValue()));
-      }
       
     }
   
