@@ -6,10 +6,11 @@ class Command(ABC):
     @abstractmethod
     def execute(self):
         pass
-    
+
     @abstractmethod
     def undo(self):
         pass
+
 
 class CreateUserCommand(Command):
     def __init__(self, receiver, user):
@@ -20,13 +21,14 @@ class CreateUserCommand(Command):
     def execute(self):
         response = self.receiver.create_user(self.user)
         if response.status_code == 201:
-            self.user_id = response.json()['id']
+            self.user_id = response.json()["id"]
             print(f"User created with ID: {self.user_id}")
 
     def undo(self):
         if self.user_id:
             self.receiver.delete_user(self.user_id)
             print(f"User with ID: {self.user_id} deleted")
+
 
 class UpdateUserCommand(Command):
     def __init__(self, receiver, user_id, new_data):
@@ -47,6 +49,7 @@ class UpdateUserCommand(Command):
             self.receiver.update_user(self.user_id, self.old_data)
             print(f"User with ID: {self.user_id} restored to old data")
 
+
 class DeleteUserCommand(Command):
     def __init__(self, receiver, user_id):
         self.receiver = receiver
@@ -64,6 +67,7 @@ class DeleteUserCommand(Command):
         if self.deleted_data:
             self.receiver.create_user(self.deleted_data)
             print(f"User with ID: {self.user_id} restored")
+
 
 class UserManagerAPI:
     def __init__(self, base_url):
@@ -101,6 +105,7 @@ class UserInvoker:
             command = self._undone_commands.pop()
             command.undo()
 
+
 if __name__ == "__main__":
     api = UserManagerAPI("http://localhost:5000")
     invoker = UserInvoker()
@@ -112,7 +117,7 @@ if __name__ == "__main__":
     create_user2 = CreateUserCommand(api, user2)
     update_user1 = UpdateUserCommand(api, 1, {"name": "John Smith"})
     delete_user2 = DeleteUserCommand(api, 2)
-    
+
     invoker.store_command(create_user1)
     invoker.store_command(create_user2)
     invoker.store_command(update_user1)

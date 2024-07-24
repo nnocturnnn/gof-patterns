@@ -1,25 +1,24 @@
-
 class Memento:
     def __init__(self, state):
         self._state = state
 
     def get_state(self):
         return self._state
-    
+
 
 class API:
     def __init__(self, url):
-        self._url = url 
-    
+        self._url = url
+
     def get_url(self):
         return self._url
 
     def set_url(self, url):
         self._url = url
-    
+
     def save(self):
         return Memento(self._url)
-    
+
     def restore(self, memento):
         self._url = memento.get_state()
 
@@ -27,10 +26,10 @@ class API:
 class Caretaker:
     def __init__(self):
         self._mementos = []
-    
+
     def add_memento(self, memento):
         self._mementos.append(memento)
-    
+
     def get_memento(self, index):
         return self._mementos[index]
 

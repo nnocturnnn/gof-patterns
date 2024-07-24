@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
+
 class API:
     def __init__(self):
         self.__endpoint = None
@@ -18,6 +19,7 @@ class API:
     def get_api(self):
         return f"API: {self.__endpoint}, {self.__headers}, {self.__documentation}"
 
+
 class IDeveloper(metaclass=ABCMeta):
     @abstractmethod
     def create_endpoint(self):
@@ -35,6 +37,7 @@ class IDeveloper(metaclass=ABCMeta):
     def get_api(self):
         pass
 
+
 class RESTDeveloper(IDeveloper):
     def __init__(self):
         self.__api = API()
@@ -51,6 +54,7 @@ class RESTDeveloper(IDeveloper):
     def get_api(self):
         return self.__api
 
+
 class SOAPDeveloper(IDeveloper):
     def __init__(self):
         self.__api = API()
@@ -66,6 +70,7 @@ class SOAPDeveloper(IDeveloper):
 
     def get_api(self):
         return self.__api
+
 
 class APIBuilder:
     def __init__(self, developer):
@@ -84,6 +89,7 @@ class APIBuilder:
         self.__developer.create_endpoint()
         self.__developer.create_headers()
         return self.__developer.get_api()
+
 
 if __name__ == "__main__":
     rest_developer = RESTDeveloper()

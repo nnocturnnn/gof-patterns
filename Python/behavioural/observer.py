@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
 
+
 class IObserver(ABC):
     @abstractmethod
     def update(self, subject):
         pass
+
 
 class ISubject(ABC):
     @abstractmethod
@@ -17,6 +19,7 @@ class ISubject(ABC):
     @abstractmethod
     def notify(self):
         pass
+
 
 class Article(ISubject):
     def __init__(self, title, content):
@@ -46,17 +49,22 @@ class Article(ISubject):
         print(f"Article '{self._title}' is published.")
         self.notify()
 
+
 class EmailNotificationObserver(IObserver):
     def update(self, subject):
         print(f"Sending email: The article '{subject.title}' has been published.")
+
 
 class LogObserver(IObserver):
     def update(self, subject):
         print(f"Log entry: The article '{subject.title}' has been published.")
 
+
 class CacheUpdateObserver(IObserver):
     def update(self, subject):
-        print(f"Cache update: The article '{subject.title}' has been updated in the cache.")
+        print(
+            f"Cache update: The article '{subject.title}' has been updated in the cache."
+        )
 
 
 if __name__ == "__main__":

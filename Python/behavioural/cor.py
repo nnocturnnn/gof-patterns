@@ -1,4 +1,3 @@
-
 class Middleware:
     def __init__(self):
         self.next = None
@@ -15,21 +14,24 @@ class Middleware:
 
 class AuthMiddleware(Middleware):
     def handle(self, request):
-        if not request.get('is_authenticated', False):
+        if not request.get("is_authenticated", False):
             raise Exception("Unauthorized")
         print("Аутентификация успешна")
         return super().handle(request)
+
 
 class LoggerMiddleware(Middleware):
     def handle(self, request):
         print(f"URL запроса: {request.get('url')}")
         return super().handle(request)
 
+
 class RequestProcessorMiddleware(Middleware):
     def handle(self, request):
         print("Обработка запроса...")
-        request['processed'] = True
+        request["processed"] = True
         return super().handle(request)
+
 
 if __name__ == "__main__":
     auth = AuthMiddleware()
@@ -38,11 +40,7 @@ if __name__ == "__main__":
 
     auth.set_next(logger).set_next(processor)
 
-    request = {
-        'url': '/api/data',
-        'is_authenticated': True,
-        'processed': False
-    }
+    request = {"url": "/api/data", "is_authenticated": True, "processed": False}
 
     try:
         auth.handle(request)

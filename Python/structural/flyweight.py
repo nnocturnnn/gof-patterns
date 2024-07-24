@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class CacheFlyweight(ABC):
     @abstractmethod
     def get_data(self, query: str):

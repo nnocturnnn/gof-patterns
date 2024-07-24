@@ -1,40 +1,43 @@
 from abc import ABC, abstractmethod
 
+
 class ModuleComponent(ABC):
     @abstractmethod
-    def add(self, module: 'ModuleComponent'):
+    def add(self, module: "ModuleComponent"):
         pass
 
     @abstractmethod
-    def remove(self, module: 'ModuleComponent'):
+    def remove(self, module: "ModuleComponent"):
         pass
 
     @abstractmethod
     def display(self, depth: int):
         pass
+
 
 class Module(ModuleComponent):
     def __init__(self, name: str):
         self.name = name
 
-    def add(self, module: 'ModuleComponent'):
+    def add(self, module: "ModuleComponent"):
         raise NotImplementedError("Cannot add to a leaf")
 
-    def remove(self, module: 'ModuleComponent'):
+    def remove(self, module: "ModuleComponent"):
         raise NotImplementedError("Cannot remove from a leaf")
 
     def display(self, depth: int):
         print(f"{'-' * depth} {self.name}")
+
 
 class CompositeModule(ModuleComponent):
     def __init__(self, name: str):
         self.name = name
         self.modules = []
 
-    def add(self, module: 'ModuleComponent'):
+    def add(self, module: "ModuleComponent"):
         self.modules.append(module)
 
-    def remove(self, module: 'ModuleComponent'):
+    def remove(self, module: "ModuleComponent"):
         self.modules.remove(module)
 
     def display(self, depth: int):

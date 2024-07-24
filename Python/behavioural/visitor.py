@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Visitor(ABC):
     @abstractmethod
     def visit_button(self, element):
@@ -9,6 +10,7 @@ class Visitor(ABC):
     def visit_text(self, element):
         pass
 
+
 class AnalyticsVisitor(Visitor):
     def visit_button(self, element):
         print(f"Tracking analytics for button: {element.name}")
@@ -16,10 +18,12 @@ class AnalyticsVisitor(Visitor):
     def visit_text(self, element):
         print(f"Tracking analytics for text: {element.content}")
 
+
 class Element(ABC):
     @abstractmethod
     def accept(self, visitor: Visitor):
         pass
+
 
 class Button(Element):
     def __init__(self, name):
@@ -28,12 +32,14 @@ class Button(Element):
     def accept(self, visitor: Visitor):
         visitor.visit_button(self)
 
+
 class Text(Element):
     def __init__(self, content):
         self.content = content
 
     def accept(self, visitor: Visitor):
         visitor.visit_text(self)
+
 
 button = Button("Submit")
 text = Text("Welcome to our site")

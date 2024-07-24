@@ -1,5 +1,6 @@
 import copy
 
+
 class Prototype:
     def __init__(self):
         self._objects = {}
